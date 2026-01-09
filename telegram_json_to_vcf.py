@@ -87,7 +87,11 @@ with open(vcf_file, "w", encoding="utf8") as f:
     for contact in contacts:
         fname = contact["first_name"]
         lname = contact["last_name"]
+        cell_raw = contact["phone_number"]
         cell = contact["phone_number"]
+        if cell[:2] == "00":
+            cell = "+" + cell[2:]
+
         vcard = vcf(fname, lname, cell)
 
         is_okay = ask(vcard, add_all)
